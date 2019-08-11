@@ -2,9 +2,11 @@ from flask import Flask, jsonify, render_template, request, send_from_directory
 import time
 from random import choice
 from os.path import abspath,join,dirname
-root_folder = abspath(dirname(__file__))
-root_folder = "c:/Perso/jquery.flashcards/"
-print(root_folder)
+import logging
+
+# root_folder = abspath(dirname(__file__))
+# root_folder = "c:/Perso/jquery.flashcards/"
+# print(root_folder)
 app = Flask(__name__, static_url_path='/static/')
 
 cards_pdf = {} #card probability density function
@@ -22,6 +24,7 @@ def get_next_card(cards_pdf, card_index):
     the index of the next card to be displayed
     """
     algo_version = 1
+    print(algo_version)
     if algo_version ==0:
         next_index =  (card_index+1)%5
     elif algo_version==1:
@@ -32,11 +35,12 @@ def get_next_card(cards_pdf, card_index):
             sum_all_scores+=sum(cards_pdf[i])
         equal_prob_list = []
         for i in range(len(cards_pdf)):
+            #here the multiplier int(summ_all_scores)/sum(cards_pdf[i])
+            #is an approximation, more accurately should be a compute of all prime dividers and scaling
+            #not done yet and probably never
             equal_prob_list+=[i]*int((sum_all_scores/sum(cards_pdf[i])))
-        print(equal_prob_list)
-        number_elements=len(equal_prob_list)
+        logging.debug(equal_prob_list)
         next_index=choice(equal_prob_list)
-    print("MCV 39",next_index)
     return(next_index)
             
 
@@ -61,6 +65,7 @@ def randomize():
     cards_pdf[card_index].append(assesment_level)
     print(cards_pdf)
     card_index = get_next_card(cards_pdf,card_index)
+    logging.debug(cards_pdf)
     return jsonify({
         "next_card_index"        :  (card_index),
     })
@@ -88,4 +93,8 @@ def favicon():
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 if __name__ == "__main__":
+    logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
+    logging.debug("debug")
+    logging.info("info")
+    logging.warning("alert")
     app.run(debug=True)

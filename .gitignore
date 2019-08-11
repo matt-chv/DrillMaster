@@ -1,3 +1,8 @@
+# Own dev files:
+static/cards/am6x.js
+static/cards/am6x_cores.js
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
