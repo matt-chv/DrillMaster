@@ -1,0 +1,81 @@
+/* Color Theme
+  334d5c
+  45b29d
+  efC94c
+  e27a3f
+  df5a49
+*/
+
+body {
+  background-color: #e27a3f;
+  color: #334d5c;
+}
+
+.flashcardContainer {
+  width: 80%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+.flashcard {
+  background-color: #fff;
+  border: 0.1em solid #777;
+  box-shadow: 0 0.2em 1em 0 #777;
+}
+
+.flashcardHead, .flashcardFoot {
+  color: #DF5A49;
+  font-weight: bold;
+  font-size: 0.8em;
+  padding: 0.5em;
+}
+
+.flashcardHead {
+  border-bottom: 0.1em solid #df5a49;
+}
+
+.flashcardFoot {
+  border-top: 0.1em solid #df5a49;
+}
+
+.menu {
+  width: 15em;
+  max-width: 90%;
+  margin: 1em auto;
+  text-align: center;
+}
+
+.menu button {
+  width: 5em;
+  padding: 0.25em;
+  background-color: #efC94c;
+  border: 0.2em solid #df5a49;
+  border-radius: 0.2em;
+  outline: none;
+  box-shadow: 0 0.1em 0.2em 0 #777;
+}
+
+.menu button:not(:first-child) {
+  margin-left: 0.5em;
+}
+  
+.menu button:not(:last-child) {
+  margin-right: 0.5em;
+}
+
+.settings {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  margin-top: 1em;
+}
+
+.settings > div {
+  display: inline-block;
+  text-align: left;
+  background: #FFF;
+  border: 0.2em solid #efC94c;
+  box-shadow: 0 0 0 0.2em #df5a49;
+  border-radius: 1em;
+  padding: 0.5em;
+}

@@ -1,0 +1,29 @@
+.flashcardWrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.flashcard {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.flashcardValue, .flashcardHint {
+  text-align: center;
+}
+
+.flashcardValue {
+  font-weight: bold;
+}
+
+.flashcardHint {
+  padding-top: 1em;
+  font-style: italic;
+}
+
+.flashcardBody {
+  padding: 0.5em;
+  margin: 2em 0;
+}
