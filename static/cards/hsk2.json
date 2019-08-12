@@ -1,0 +1,125 @@
+{
+  "name":"HSK2",
+  "details":"HSK 2 vocabulary list includes 150 more required vocabulary words and phrases.",
+  "uuid4":"d1709daf-9af4-44d4-96d9-23092d705b16",
+  "next":["HSK3"],
+  "prev":["HSK1"],
+    "cards":[
+    {
+      "frontValue": "我",
+      "frontHint":  "wǒ",
+      "backValue":  "I, me",
+      "backHint":   ""
+    } 
+    //adjectives
+    ,{
+        "frontValue": "高",
+        "frontHint":  "gāo",
+        "backValue":  "tall",
+        "backHint":   ""
+      },{
+        "frontValue": "红",
+        "frontHint":  "hóng",
+        "backValue":  "red",
+        "backHint":   ""
+      },{
+        "frontValue": "白",
+        "frontHint":  "bái",
+        "backValue":  "white",
+        "backHint":   ""
+      },{
+        "frontValue": "黑",
+        "frontHint":  "hēi",
+        "backValue":  "black",
+        "backHint":   ""
+      },{
+        "frontValue": "忙",
+        "frontHint":  "máng",
+        "backValue":  "busy",
+        "backHint":   ""
+      },{
+        "frontValue": "快",
+        "frontHint":  "kuài",
+        "backValue":  "fast",
+        "backHint":   ""
+      }
+    ,{
+      "frontValue": "慢",
+      "frontHint":  "màn",
+      "backValue":  "slow",
+      "backHint":   ""
+    }
+    ,{
+        "frontValue": "远",
+        "frontHint":  "yuǎn",
+        "backValue":  "far",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "近",
+        "frontHint":  "jìn",
+        "backValue":  "close",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "好吃",
+        "frontHint":  "hǎochī",
+        "backValue":  "delicioous",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "累",
+        "frontHint":  "lèi",
+        "backValue":  "tired",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "长",
+        "frontHint":  "cháng",
+        "backValue":  "long",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "新",
+        "frontHint":  "xīn",
+        "backValue":  "new",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "贵",
+        "frontHint":  "guì",
+        "backValue":  "expensive",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "便宜",
+        "frontHint":  "piányi",
+        "backValue":  "cheap",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "晴",
+        "frontHint":  "qíng",
+        "backValue":  "fine",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "阴",
+        "frontHint":  "yīn",
+        "backValue":  "cloudy",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "错",
+        "frontHint":  "cuò",
+        "backValue":  "wrong",
+        "backHint":   ""
+      }
+      ,{
+        "frontValue": "快乐",
+        "frontHint":  "kuàilè",
+        "backValue":  "happy",
+        "backHint":   ""
+      }
+    ]
+}

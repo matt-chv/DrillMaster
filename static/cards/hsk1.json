@@ -1,147 +1,208 @@
-[{
-    "frontValue": "我",
-    "frontHint":  "wǒ",
-    "backValue":  "I, me",
-    "backHint":   ""
-  }, {
-    "frontValue": "我们",
-    "frontHint":  "wǒmen",
-    "backValue":  "we, us (pl.)",
-    "backHint":   ""
-  }, {
-    "frontValue": "你",
-    "frontHint":  "nǐ",
-    "backValue":  "you",
-    "backHint":   ""
-  }, {
-    "frontValue": "你们",
-    "frontHint":  "nǐmen",
-    "backValue":  "you (pl.)",
-    "backHint":   ""
-  }, {
-    "frontValue": "他",
-    "frontHint":  "tā",
-    "backValue":  "he, him",
-    "backHint":   ""
-  }, {
-    "frontValue": "她",
-    "frontHint":  "tā",
-    "backValue":  "she, her",
-    "backHint":   ""
-  }, {
-    "frontValue": "他们",
-    "frontHint":  "tāmen",
-    "backValue":  "they (male+female / male, pl.)",
-    "backHint":   ""
-  }, {
-    "frontValue": "她们",
-    "frontHint":  "tāmen",
-    "backValue":  "they (females, pl.)",
-    "backHint":   ""
-  }, {
-    "frontValue": "这 (这儿)",
-    "frontHint":  "zhè ( zhèr)",
-    "backValue":  "here, this",
-    "backHint":   ""
-  }, {
-    "frontValue": "那 (那儿)",
-    "frontHint":  "nà (nàr)",
-    "backValue":  "there, that",
-    "backHint":   ""
-  },
-  //interogatve pron.
-  {
-    "frontValue": "哪（哪儿）",
-    "frontHint":  "nà (nàr)",
-    "backValue":  "there, that",
-    "backHint":   ""
-  }, {
-    "frontValue": "谁",
-    "frontHint":  "shuí",
-    "backValue":  "who",
-    "backHint":   ""
-  }, {
-    "frontValue": "什么",
-    "frontHint":  "shén me",
-    "backValue":  "what, why",
-    "backHint":   ""
-  }, {
-    "frontValue": "多少",
-    "frontHint":  "duōshǎo",
-    "backValue":  "how many, how much",
-    "backHint":   ""
-  }, {
-    "frontValue": "几",
-    "frontHint":  "jǐ",
-    "backValue":  "a few, how many",
-    "backHint":   ""
-  }, {
-    "frontValue": "怎么",
-    "frontHint":  "zěnme",
-    "backValue":  "how",
-    "backHint":   ""
-  }, {
-    "frontValue": "怎么样",
-    "frontHint":  "zěnmeyàng",
-    "backValue":  "how about",
-    "backHint":   ""
-  }
-  //Numeral:
- , {
-    "frontValue": "一",
-    "frontHint":  "yī",
-    "backValue":  "one (1)",
-    "backHint":   ""
-  }, {
-    "frontValue": "二",
-    "frontHint":  "èr",
-    "backValue":  "two",
-    "backHint":   ""
-  }, {
-    "frontValue": "三	",
-    "frontHint":  "sān",
-    "backValue":  "thre",
-    "backHint":   ""
-  }, {
-    "frontValue": "四",
-    "frontHint":  "sì",
-    "backValue":  "four",
-    "backHint":   ""
-  }, {
-    "frontValue": "五",
-    "frontHint":  "wǔ",
-    "backValue":  "five",
-    "backHint":   ""
-  } , {
-    "frontValue": "六",
-    "frontHint":  "liù",
-    "backValue":  "six (6)",
-    "backHint":   ""
-  }, {
-    "frontValue": "七",
-    "frontHint":  "qī",
-    "backValue":  "seven",
-    "backHint":   ""
-  }, {
-    "frontValue": "八",
-    "frontHint":  "bā",
-    "backValue":  "eight",
-    "backHint":   ""
-  }, {
-    "frontValue": "九",
-    "frontHint":  "jiǔ",
-    "backValue":  "nine",
-    "backHint":   ""
-  }, {
-    "frontValue": "十",
-    "frontHint":  "shí",
-    "backValue":  "ten",
-    "backHint":   ""
-  }, {
-    "frontValue": "零",
-    "frontHint":  "líng",
-    "backValue":  "zero (0)",
-    "backHint":   ""
-  }
-
-]
+{
+  "name":"HSK1",
+  "details":"HSK 1 vocabulary list includes 150 required vocabulary words and phrases.",
+  "uuid4":"fb53ad82-9eb5-45f4-aa28-67e1a404a4b8",
+  "next":["HSK2"],
+  "prev":[],
+    "cards":[{
+      "frontValue": "我",
+      "frontHint":  "wǒ",
+      "backValue":  "I, me",
+      "backHint":   ""
+    }, {
+      "frontValue": "我们",
+      "frontHint":  "wǒmen",
+      "backValue":  "we, us (pl.)",
+      "backHint":   ""
+    }, {
+      "frontValue": "你",
+      "frontHint":  "nǐ",
+      "backValue":  "you",
+      "backHint":   ""
+    }, {
+      "frontValue": "你们",
+      "frontHint":  "nǐmen",
+      "backValue":  "you (pl.)",
+      "backHint":   ""
+    }, {
+      "frontValue": "他",
+      "frontHint":  "tā",
+      "backValue":  "he, him",
+      "backHint":   ""
+    }, {
+      "frontValue": "她",
+      "frontHint":  "tā",
+      "backValue":  "she, her",
+      "backHint":   ""
+    }, {
+      "frontValue": "他们",
+      "frontHint":  "tāmen",
+      "backValue":  "they (male+female / male, pl.)",
+      "backHint":   ""
+    }, {
+      "frontValue": "她们",
+      "frontHint":  "tāmen",
+      "backValue":  "they (females, pl.)",
+      "backHint":   ""
+    }, {
+      "frontValue": "这 (这儿)",
+      "frontHint":  "zhè ( zhèr)",
+      "backValue":  "here, this",
+      "backHint":   ""
+    }, {
+      "frontValue": "那 (那儿)",
+      "frontHint":  "nà (nàr)",
+      "backValue":  "there, that",
+      "backHint":   ""
+    },
+    //interogatve pron.
+    {
+      "frontValue": "哪（哪儿）",
+      "frontHint":  "nà (nàr)",
+      "backValue":  "there, that",
+      "backHint":   ""
+    }, {
+      "frontValue": "谁",
+      "frontHint":  "shuí",
+      "backValue":  "who",
+      "backHint":   ""
+    }, {
+      "frontValue": "什么",
+      "frontHint":  "shén me",
+      "backValue":  "what, why",
+      "backHint":   ""
+    }, {
+      "frontValue": "多少",
+      "frontHint":  "duōshǎo",
+      "backValue":  "how many, how much",
+      "backHint":   ""
+    }, {
+      "frontValue": "几",
+      "frontHint":  "jǐ",
+      "backValue":  "a few, how many",
+      "backHint":   ""
+    }, {
+      "frontValue": "怎么",
+      "frontHint":  "zěnme",
+      "backValue":  "how",
+      "backHint":   ""
+    }, {
+      "frontValue": "怎么样",
+      "frontHint":  "zěnmeyàng",
+      "backValue":  "how about",
+      "backHint":   ""
+    }
+    //Numeral:
+   , {
+      "frontValue": "一",
+      "frontHint":  "yī",
+      "backValue":  "one (1)",
+      "backHint":   ""
+    }, {
+      "frontValue": "二",
+      "frontHint":  "èr",
+      "backValue":  "two",
+      "backHint":   ""
+    }, {
+      "frontValue": "三	",
+      "frontHint":  "sān",
+      "backValue":  "thre",
+      "backHint":   ""
+    }, {
+      "frontValue": "四",
+      "frontHint":  "sì",
+      "backValue":  "four",
+      "backHint":   ""
+    }, {
+      "frontValue": "五",
+      "frontHint":  "wǔ",
+      "backValue":  "five",
+      "backHint":   ""
+    } , {
+      "frontValue": "六",
+      "frontHint":  "liù",
+      "backValue":  "six (6)",
+      "backHint":   ""
+    }, {
+      "frontValue": "七",
+      "frontHint":  "qī",
+      "backValue":  "seven",
+      "backHint":   ""
+    }, {
+      "frontValue": "八",
+      "frontHint":  "bā",
+      "backValue":  "eight",
+      "backHint":   ""
+    }, {
+      "frontValue": "九",
+      "frontHint":  "jiǔ",
+      "backValue":  "nine",
+      "backHint":   ""
+    }, {
+      "frontValue": "十",
+      "frontHint":  "shí",
+      "backValue":  "ten",
+      "backHint":   ""
+    }, {
+      "frontValue": "零",
+      "frontHint":  "líng",
+      "backValue":  "zero (0)",
+      "backHint":   ""
+    }
+    //quantifier
+    //adverb
+    //conjunction
+    //preposition
+    //auxiliary
+    //interjetion
+    //noun
+    //verb
+    //adjective
+    , {
+      "frontValue": "好",
+      "frontHint":  "hǎo",
+      "backValue":  "zero (0)",
+      "backHint":   ""
+    }, {
+      "frontValue": "大",
+      "frontHint":  "dà",
+      "backValue":  "big",
+      "backHint":   ""
+    }, {
+      "frontValue": "小",
+      "frontHint":  "xiǎo",
+      "backValue":  "small",
+      "backHint":   ""
+    }, {
+      "frontValue": "多",
+      "frontHint":  "duō",
+      "backValue":  "many, much",
+      "backHint":   ""
+    }, {
+      "frontValue": "少",
+      "frontHint":  "shǎo",
+      "backValue":  "few, little",
+      "backHint":   ""
+    }, {
+      "frontValue": "冷",
+      "frontHint":  "lěng",
+      "backValue":  "cold",
+      "backHint":   ""
+    }, {
+      "frontValue": "热",
+      "frontHint":  "rè",
+      "backValue":  "hot",
+      "backHint":   ""
+    }, {
+      "frontValue": "高兴",
+      "frontHint":  "gāoxìng",
+      "backValue":  "happy",
+      "backHint":   ""
+    }, {
+      "frontValue": "漂亮",
+      "frontHint":  "piàoliàng",
+      "backValue":  "beautiful",
+      "backHint":   ""
+    }
+  
+  ]
