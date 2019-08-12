@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request, send_from_directory
 import time
+import json
 from random import choice
 from os.path import abspath,join,dirname
 import logging
@@ -10,8 +11,6 @@ import logging
 app = Flask(__name__, static_url_path='/static/')
 
 cards_pdf = {} #card probability density function
-for i in range(5):
-    cards_pdf[i]=[1]
 
 def get_next_card(cards_pdf, card_index):
     """
@@ -39,35 +38,39 @@ def get_next_card(cards_pdf, card_index):
             #is an approximation, more accurately should be a compute of all prime dividers and scaling
             #not done yet and probably never
             equal_prob_list+=[i]*int((sum_all_scores/sum(cards_pdf[i])))
-        logging.debug(equal_prob_list)
         next_index=choice(equal_prob_list)
     return(next_index)
             
-
-# @app.route("/")
-# def main():
-#     return render_template('main.html', reload = time.time())
-
-# @app.route("/api/info")
-# def api_info():
-#     info = {
-#        "ip" : "127.0.0.1",
-#        "hostname" : "everest",
-#        "description" : "Main server",
-#        "load" : [ 3.21, 7, 14 ]
-#     }
-#     return jsonify(info)
-
 @app.route("/api/mnemo")
 def randomize():
     card_index = int(request.args.get('card_index', 0))
     assesment_level = int(request.args.get('assesment_level', 0))
     cards_pdf[card_index].append(assesment_level)
-    print(cards_pdf)
     card_index = get_next_card(cards_pdf,card_index)
     logging.debug(cards_pdf)
     return jsonify({
         "next_card_index"        :  (card_index),
+    })
+
+@app.route("/api/lessons")
+def get_lesson():
+    """
+    Parameters:
+    cards: str
+        name of the cards to be loaded - in the cards folder
+    Return:
+    -------
+    lessons: json
+    json string (utf-8) containing front / back and hints for the flashcard
+    """ 
+    lessons = request.args.get('cards',0)
+    fp = abspath(join('/static','cards',"%s.js"%(lessons)))
+    with open("C:/Perso/flashcards/static/cards/hsk1.js",'r', encoding='utf-8') as fi:
+        json_cards = json.load(fi)
+    for i in range(len(json_cards)):
+        cards_pdf[i]=[1]
+    return jsonify({
+        "lessons"        :  json_cards,
     })
 
 @app.route('/cards/<path:path>')
@@ -94,7 +97,4 @@ def favicon():
 
 if __name__ == "__main__":
     logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-    logging.debug("debug")
-    logging.info("info")
-    logging.warning("alert")
     app.run(debug=True)
