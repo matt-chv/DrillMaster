@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.flashcards.css">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/jquery.flashcards.js"></script>
+    <!--script type="text/javascript" src="js/data.js"></script-->
+    <!--script type="text/javascript" src="cards/hsk1.js"></script-->
+    <script>
+      //here load the flashcards to be studied
+    cards = ""
+    $.ajax({
+        url : '/api/lessons?cards={{learn_card}}',
+        success: function(data) {
+          cards=data["lessons"];
+          console.log("mcv js 21")
+          console.log(cards)
+        }
+      })
+      console.log("mcv js 23")
+      console.log(cards)
+    </script>
+
+    <script type="text/javascript" src="/js/main.js"></script>
+  </head>
+  <body>
+    <div class="settings">
+      <div>
+        <input type="radio" id="front_value_and_hint" name="side_mode">
+        <label for="front_value_and_hint">Front Value and Hint</label>
+        <br/>
+        <input type="radio" id="front_value" name="side_mode" checked="checked">
+        <label for="front_value">Front Value</label>
+        <br/>
+        <input type="radio" id="back_only" name="side_mode">
+        <label for="back_hint">Back Hint</label>
+      </div>
+    </div>
+    <div class="menu">
+      <button name="switch">Switch</button>
+      <button name="turn">Turn</button>
+    </div>
+    <div class="flashcardContainer"></div>
+    <hr>
+    Grade your answer:
+    <div class="ranking">
+      <button name="level0">0</button>
+      <button name="level1">1</button>
+      <button name="level2">2</button>
+      <button name="level3">3</button>
+      <button name="level4">4</button>
+      <button name="level5">5</button>
+
+    </div>
+
+  </body>
+</html>

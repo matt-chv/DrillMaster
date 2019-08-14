@@ -1,8 +1,24 @@
 # README
-Client (jQuery) /Server (Flask) solution for flashcards 
-Client for rendering of flash-cards and
-Server for computing the flash-cards to be shownd with a frequency inverse to how well the cards are known.
-Server side for entering flash-cards
+* Client (jQuery) /Server (Flask) solution for flashcards 
+* Flashcards stored as json file for easier manual or programmatic edits
+* algorithm: custom now - [SM2+](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2) next
+
+## Usage
+git clone https://github.com/matt-chv/flashcards.git
+cd Flask-Cards
+pip install -r requirements.txt
+flask db init
+flask db migrate -m "users table"
+flask db migrate -m "cards table"
+flask db upgrade
+flask run
+
+## Coming (soon?)
+* Algorithm update to SM2
+* Flashcards in markdown
+* Flashcards rendering with css formatting for code / math / ... ala jupyter notebook
+* import/export Anki and Mnemosyne file format for flashcards
+* import/export Anki / Mnemosyne learning history
 
 ## CREDITS
 The hmtl and js was initially forked from Johennes' flashcards

@@ -64,18 +64,38 @@ def get_lesson():
     json string (utf-8) containing front / back and hints for the flashcard
     """ 
     lessons = request.args.get('cards',0)
+    print("mcv 67",lessons)
+    cards_fp ="C:/Perso/flashcards/static/cards/%s.json"%(lessons) 
+    print("mcv 69",cards_fp)
     fp = abspath(join('/static','cards',"%s.js"%(lessons)))
-    with open("C:/Perso/flashcards/static/cards/hsk1.js",'r', encoding='utf-8') as fi:
+    with open(cards_fp,'r', encoding='utf-8') as fi:
         json_cards = json.load(fi)
-    for i in range(len(json_cards)):
+    for i in range(len(json_cards["cards"])):
         cards_pdf[i]=[1]
+    print("mcv lessons length",i)
+    print("mcv 76",json_cards["cards"])
     return jsonify({
-        "lessons"        :  json_cards,
+        "lessons"        :  json_cards["cards"],
     })
+
+@app.route('/api/learn')
+def send_learn():
+    """
+    Parameters:
+    -----------
+    Return:
+    -------
+    Example:
+    --------
+    GET http://127.0.0.1:5000/api/learn?cards=hsk1
+    """
+    print("test mcv 78")
+    lessons = request.args.get('cards',0)
+    print("mcv 92",lessons)
+    return render_template('learn.html', learn_card=lessons)
 
 @app.route('/cards/<path:path>')
 def send_cards_js(path):
-    print(70,"mcv",path)
     return send_from_directory('static/cards', path)
 
 @app.route('/js/<path:path>')

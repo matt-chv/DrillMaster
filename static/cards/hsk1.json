@@ -2,6 +2,7 @@
   "name":"HSK1",
   "details":"HSK 1 vocabulary list includes 150 required vocabulary words and phrases.",
   "uuid4":"fb53ad82-9eb5-45f4-aa28-67e1a404a4b8",
+  "source":"https://www.digmandarin.com/hsk-1-vocabulary-list.html",
   "next":["HSK2"],
   "prev":[],
     "cards":[{
@@ -54,9 +55,9 @@
       "frontHint":  "nà (nàr)",
       "backValue":  "there, that",
       "backHint":   ""
-    },
-    //interogatve pron.
-    {
+    }
+    ,{
+      "_comment": "interogative pronoun",
       "frontValue": "哪（哪儿）",
       "frontHint":  "nà (nàr)",
       "backValue":  "there, that",
@@ -91,9 +92,8 @@
       "frontHint":  "zěnmeyàng",
       "backValue":  "how about",
       "backHint":   ""
-    }
-    //Numeral:
-   , {
+    }, {
+      "_comment": "Numeral",
       "frontValue": "一",
       "frontHint":  "yī",
       "backValue":  "one (1)",
@@ -104,7 +104,7 @@
       "backValue":  "two",
       "backHint":   ""
     }, {
-      "frontValue": "三	",
+      "frontValue": "三",
       "frontHint":  "sān",
       "backValue":  "thre",
       "backHint":   ""
@@ -148,17 +148,8 @@
       "frontHint":  "líng",
       "backValue":  "zero (0)",
       "backHint":   ""
-    }
-    //quantifier
-    //adverb
-    //conjunction
-    //preposition
-    //auxiliary
-    //interjetion
-    //noun
-    //verb
-    //adjective
-    , {
+    }, {
+      "_comment":"//quantifier //adverb //conjunction //preposition //auxiliary //interjetion //noun //verb //adjective",
       "frontValue": "好",
       "frontHint":  "hǎo",
       "backValue":  "zero (0)",
@@ -204,5 +195,5 @@
       "backValue":  "beautiful",
       "backHint":   ""
     }
-  
   ]
+}

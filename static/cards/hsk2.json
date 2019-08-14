@@ -11,8 +11,8 @@
       "backValue":  "I, me",
       "backHint":   ""
     } 
-    //adjectives
     ,{
+      "_comment": "adjectives",
         "frontValue": "高",
         "frontHint":  "gāo",
         "backValue":  "tall",
