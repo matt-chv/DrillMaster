@@ -5,7 +5,7 @@
 
 ## Usage
 git clone https://github.com/matt-chv/flashcards.git
-cd Flask-Cards
+cd flashcards
 pip install -r requirements.txt
 flask db init
 flask db migrate -m "users table"
@@ -14,6 +14,7 @@ flask db upgrade
 flask run
 
 ## Coming (soon?)
+* adding support for WebSockets for student / assessor flash card synch
 * Algorithm update to SM2
 * Flashcards in markdown
 * Flashcards rendering with css formatting for code / math / ... ala jupyter notebook
