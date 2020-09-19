@@ -1,0 +1,12 @@
+{
+    "short_name": "Ninja Math",
+    "start_url":"/",
+    "icons": [
+        {
+          "src": "Science-Math-icon.png",
+          "type": "image/png",
+          "sizes": "512x512"
+        }],
+    "display":      "standalone", 
+    "orientation":  "landscape"
+}
