@@ -1,0 +1,47 @@
+<html><head><title>Cards</title>
+<link rel="stylesheet" href="/drillpractice/static/css/index_card.css">
+<link rel="stylesheet" href="/drillpractice/static/css/keyboard.css">
+<link rel="manifest" href="/drillpractice/static/manifest.json">
+<link rel="shortcut icon" href="/drillpractice/favicon.ico">
+<!--script
+  src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+  integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+  crossorigin="anonymous"></script-->
+<script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="block" style="width:100%; touch-action: manipulation;">
+		<div class="card" style="position:absolute; top:0px; left:0% width:50%">
+  			<div class="question" id="question"> </div>
+  			<div class="timer" id="timer">15</div>
+  			<div class="answer" id="answer">???</div>
+
+  			<div class="status" id="status"></div>
+		</div>
+		<div id="mcv_keypad" style="position:absolute; top:0px; left:50%; width:50%; ">
+			<div id="key_1" class="key" style="position:absolute; top:0px; left:0px; " ></div> 
+			<div id="key_2" class="key" style="position:absolute; top:0px; left:100px; " ></div>
+			<div id="key_3" class="key" style="position:absolute; top:0px; left:200px; "></div>
+
+			<div id="key_4" class="key" style="position:absolute; top:100px; left:0px; " ></div> 
+			<div id="key_5" class="key" style="position:absolute; top:100px; left:100px; " ></div>
+			<div id="key_6" class="key" style="position:absolute; top:100px; left:200px; " ></div>
+
+			<div id="key_7" class="key" style="position:absolute; top:200px; left:0px; " ></div> 
+			<div id="key_8" class="key" style="position:absolute; top:200px; left:100px; " ></div>
+			<div id="key_9" class="key" style="position:absolute; top:200px; left:200px; " ></div> 
+
+			<div id="key_0" class="key" style="position:absolute; top:300px; left:0px; " ></div> 
+			<div id="key_ok" class="key" style="position:absolute; top:300px; left:100px; " ></div>
+			<div id="key_del" class="key" style="position:absolute; top:300px; left:200px; " ></div> 
+		</div>
+	</div>
+<script src="/drillpractice/static/js/display_keys.js"></script>
+<script src="/drillpractice/static/js/timer.js"></script>
+<script src="/drillpractice/static/js/keyboard.js"></script>
+<script src="/drillpractice/static/js/deck.js"></script>
+</body>
+</html>

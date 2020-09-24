@@ -27,7 +27,9 @@ window.addEventListener("keydown", function(event) {
   else if (key=="Enter"){
     // here if we validate the answer
     console.log("Validating");
-    q_index = $("div").data("card");
+    validate_answer();
+    /*
+	  q_index = $("div").data("card");
     q_answer = $("div").data("deck")[q_index].answer;
     console.log("132",answer, q_answer, answer===q_answer);
     if (answer===q_answer) 
@@ -40,7 +42,7 @@ window.addEventListener("keydown", function(event) {
         document.getElementById("question").innerHTML = $("div").data("deck")[q_index].question;
         document.getElementById("answer").innerHTML = "???";
         document.getElementById("timer").innerHTML = "15";
-        document.getElementById("status").innerHTML += '<div class="tick">âœ”</div>';
+        document.getElementById("status").innerHTML += '<div class="tick">✔</div>';
       };
 
       if (lang==="fr") {
@@ -71,7 +73,8 @@ window.addEventListener("keydown", function(event) {
         speech.lang = 'en-US';
         window.speechSynthesis.speak(speech);
       }
-    }
+    
+  }*/
   }
   else {  
     //here if we append a character to the answer
@@ -83,7 +86,7 @@ window.addEventListener("keydown", function(event) {
   }
 });
 
-function validate_answer() {
+function validate_answer_remove() {
   // code to be executed
   answer = document.getElementById("answer").innerHTML;
   console.log("mcv validating");
@@ -103,7 +106,7 @@ function validate_answer() {
         document.getElementById("question").innerHTML = $("div").data("deck")[q_index].question;
         document.getElementById("answer").innerHTML = "???";
         document.getElementById("timer").innerHTML = "15";
-        document.getElementById("status").innerHTML += '<div class="tick">âœ”</div>';
+        document.getElementById("status").innerHTML += '<div class="tick">✔</div>';
       };
 
       if (lang==="fr") {
