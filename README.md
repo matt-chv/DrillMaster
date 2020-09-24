@@ -6,15 +6,38 @@ All in one solution to help kids learn with advanced drilling solutions for time
 * Flashcards written in markdown and import/export in json file for easier manual or programmatic edits
 * Frequency of question optimised as function of how well answer is remembered (see SRS below). Today SM2+ like, next A/B split testing SM2 vs SM19
 
-## Usage
-git clone https://github.com/matt-chv/flashcards.git
-cd flashcards
+## Installation
+
+```bash
+cd /var/www/
+mkdir -p DrillMaster
+git clone git@github.com:matt-chv/DrillMaster.git
+cd DrillMaster
 pip install -r requirements.txt
 flask db init
 flask db migrate -m "users table"
 flask db migrate -m "cards table"
 flask db upgrade
 flask run
+```
+
+### Apache settings
+
+```wsgi
+WSGIScriptAlias /drillmaster /var/www/DrillMaster/drillmaster.wsgi
+
+<Directory /var/www/DrillMaster/DrillMaster/>
+   Order allow,deny
+   Allow from all
+</Directory>
+
+Alias "/DrillMaster/static/" "/var/www/DrillMaster/DrillMaster/static/"
+<Directory /var/www/DrillMaster/DrillMaster/static/>
+   Order allow,deny
+   Allow from all
+</Directory>
+```
+
 
 ## Coming (soon?)
 * adding support for WebSockets for student / assessor flash card synch
@@ -25,8 +48,8 @@ flask run
 * import/export Anki / Mnemosyne learning history
 
 ## CREDITS
-The hmtl and js was initially forked from Johennes' flashcards
->git clone https://github.com/Johennes/jquery.flashcards.git
+
+> Add here open source licenses
 
 ### SRS
 
