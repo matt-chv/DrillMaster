@@ -16,6 +16,11 @@ start practicing :)
 
 ## Installation
 
+### Install mod_wsgi
+see onlin tutorials
+
+### Clone flask app 
+
 ```bash
 cd /var/www/
 mkdir -p DrillMaster
@@ -47,8 +52,9 @@ Alias "/DrillMaster/static/" "/var/www/DrillMaster/DrillMaster/static/"
 </Directory>
 ```
 
+## Next
 
-## Coming (soon?)
+Coming (soon?):
 * adding support for WebSockets for student / assessor flash card synch
 * Algorithm update to SM2
 * Flashcards in markdown
