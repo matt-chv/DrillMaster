@@ -1,7 +1,10 @@
 # README
-* Client (jQuery) /Server (Flask) solution for flashcards 
-* Flashcards stored as json file for easier manual or programmatic edits
-* algorithm: custom now - [SM2+](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2) next
+
+All in one solution to help kids learn with advanced drilling solutions for times table, vocab cards, ...
+
+* HTML5 client (jQuery+PWA) /Server (Flask) solution for flashcards 
+* Flashcards written in markdown and import/export in json file for easier manual or programmatic edits
+* Frequency of question optimised as function of how well answer is remembered (see SRS below). Today SM2+ like, next A/B split testing SM2 vs SM19
 
 ## Usage
 git clone https://github.com/matt-chv/flashcards.git
@@ -24,3 +27,15 @@ flask run
 ## CREDITS
 The hmtl and js was initially forked from Johennes' flashcards
 >git clone https://github.com/Johennes/jquery.flashcards.git
+
+### SRS
+
+At a very high level SRS is a computer version of Leitner system which is the theoretical underpinning for paper flash cards and multiple decks.
+
+More specifically memorisation is a function of how often a memory has been recalled (see Hermann Ebbinghaus [here](http://www.deutschestextarchiv.de/book/view/ebbinghaus_gedaechtnis_1885?p=67) or wikipedia's summary [here](https://en.wikipedia.org/wiki/Hermann_Ebbinghaus) )
+
+
+Thus optimising how often a memory is recalled helps improve how fast new data can be memorised without overloading brain nor agendas.
+
+For algorithmic details, see [Here](http://www.blueraja.com/blog/477/a-better-spaced-repetition-learning-algorithm-sm2) next
+
