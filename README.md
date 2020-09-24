@@ -27,6 +27,7 @@ flask db migrate -m "users table"
 flask db migrate -m "cards table"
 flask db upgrade
 flask run
+mv drillmaster.wsgi ..
 ```
 
 ### Apache settings
