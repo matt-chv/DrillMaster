@@ -6,6 +6,14 @@ All in one solution to help kids learn with advanced drilling solutions for time
 * Flashcards written in markdown and import/export in json file for easier manual or programmatic edits
 * Frequency of question optimised as function of how well answer is remembered (see SRS below). Today SM2+ like, next A/B split testing SM2 vs SM19
 
+## Usage
+
+after going through installation on your_server (either a VPS IP or a C_NAME)
+
+open in a web-browser http://your_server/drillmaster/
+
+start practicing :)
+
 ## Installation
 
 ```bash
