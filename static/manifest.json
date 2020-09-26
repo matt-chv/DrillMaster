@@ -1,12 +1,22 @@
 {
-    "short_name": "Ninja Math",
-    "start_url":"/",
+    "name": "Drill Master",
+    "short_name": "DM",
+    "start_url":"/drillmaster",
     "icons": [
         {
           "src": "Science-Math-icon.png",
           "type": "image/png",
-          "sizes": "512x512"
+          "sizes": "512x512",
+          "purpose": "any maskable"
         }],
     "display":      "standalone", 
-    "orientation":  "landscape"
+    "orientation":  "landscape",
+    "theme_color": "#a300c4",
+    "background_color": "#c46a00",
+    "serviceworker": {
+      "src": "/drillmaster/static/js/sw.js",
+      "type": "",
+      "update_via_cache": "none",
+      "scope": "/drillmaster"
+    }
 }

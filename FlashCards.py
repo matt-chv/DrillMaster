@@ -25,12 +25,19 @@ msg_bravo = "bravo     "
 msg_try_again = "try again    \a"
 ISO8601 = "%Y-%m-%dT%H:%M:%S"
 
+demo_json = {  "1 + 1": "2",
+  "6 \u00b7 8": "48",
+  "\u221A 10 \u2245 (1 digit) ": "3"
+}
+
 class flash_card_deck:
     fn = None
     this_session_good = 0
     this_session_bad = 0
     shuffled = []
     def __init__(self,fp=None):
+        logger.info("INIT DECK")
+        print("INIT DECK")
         if fp:
             self.fn = fp
             log_msg = "loading %s deck from file"%(fp)
@@ -41,8 +48,8 @@ class flash_card_deck:
             self.set_fn(fp)
             self.fn = join(fp)
         else:
-            log_msg = "creating empty deck: %s"%(fn)
-            logging.error(log_msg)
+            log_msg = "creating empty deck: %s"%(fp)
+            logger.error(log_msg)
 
             self.json = {}
         
@@ -335,9 +342,9 @@ def isData():
     return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
 
 def summ_tables(add=20,summ=20):
-    print("creating 20+20")
+    logger.debug("creating 20+20")
     summs_deck = flash_card_deck()
-    
+    print("test",summs_deck) 
     for i in range(1, add +1):
         for j in range(1, summ +1):
             summs_deck.add_q_n_a("%s + %s"%(i,j),"%s"%(i+j),15)
@@ -351,6 +358,12 @@ def add_mult_tables(mul=6,mult=6,previous_deck=None):
         for j in range(1,mul+1):
             previous_deck.add_q_n_a("%s · %s"%(i,j),"%s"%(i*j),10)
     return previous_deck
+
+def deck_from_json(json_demo_deck=demo_json):
+  new_deck = flash_card_deck()
+  for v in json_demo_deck:
+    new_deck.add_q_n_a(v, json_demo_deck[v],15)
+  return new_deck
     
 def timed_input(buffer = "", timeout = 10):
 
@@ -457,8 +470,8 @@ def show_flash_cards(flash_cards,total_time_s):
 
 def load_deck(name,definition,root_folder=None):
     """
-    name: the deck name under which saved on HDD with with .deck extension
-    definition: the function used to initialise if no file found on HDD
+    name: the deck name under which saved on HDD with with .json extension
+    definition: the function used to initialise deck if no file found on HDD
     """
     if not root_folder:
         root_folder = join(expanduser("~"))
@@ -478,6 +491,9 @@ def load_deck(name,definition,root_folder=None):
         deck = definition()
         deck.set_fn(name)
         deck.set_shuffled()
+    else:
+        logging.info("requested deck name: %s, loading demo",name)
+        deck = deck_from_json()
     return deck
 
 class Card_Display():
@@ -489,13 +505,13 @@ class Card_Display():
     def timed_input(self):
         pass
 
-
+logger = logging.getLogger()
 if __name__=="__main__":
     import argparse
-
+    logger.setLevel(logging.DEBUG)
     logging.basicConfig()
-    logging.getLogger().setLevel(logging.INFO)
-
+    logging.getLogger().setLevel(logging.DEBUG)
+    logging.debug("TEST DEBUG")
     known_students = ["Camille","Elodie","Papa"]
 
     parser = argparse.ArgumentParser(description='CLI for flash cards')

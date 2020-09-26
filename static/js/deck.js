@@ -41,7 +41,7 @@ function push_answers() {
   // here we push the answers to the server
   //list of answer
       // answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
-  var myurl = "/drillpractice/deck";
+  var myurl = "/drillmaster/deck";
   console.log("pushing answers",$("div").data("answers"));
   json_str = JSON.stringify($("div").data("answers"));
   console.log("pushing json str",json_str);
@@ -65,7 +65,7 @@ function push_answers() {
 
 function get_cards() {
   //var xmlhttp = new XMLHttpRequest();
-  var myurl = "/drillpractice/deck?id=1";
+  var myurl = "/drillmaster/deck?id=1";
   console.log("GET REQUEST",myurl);
   //$.get(url, function(data){show_cards(data)});
   $.ajax({
