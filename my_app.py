@@ -5,6 +5,7 @@ v0.2: talks back to cars back-end
 
 #import standard modules
 import logging
+from os.path import join
 from urllib.parse import unquote
 
 #import pip modules
@@ -14,16 +15,21 @@ from flask import Flask, json, request, Response
 #import own
 from FlashCards import load_deck
 
+app_data_folder = "/var/www/DrillMaster/DrillMaster/"
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
-handler = logging.FileHandler('/var/www/DrillMaster/DrillMaster/debug.log', encoding='utf-8')
+#note important to keep encoding utf-8 to log request with cards
+#content in utf-8 format
+handler = logging.FileHandler(join(app_data_folder,"debug.log"), encoding='utf-8')
 formatter = logging.Formatter('%(name)s %(message)s')
 handler.setFormatter(formatter) # Pass handler as a parameter, not assign
 root_logger.addHandler(handler)
 
 
-students = [{"id": "4", "name": "elodie"}, {"id": "5", "name": "camille"}]
+students = [{"id":"0", "name": "demo", "deck":"demo.json"},
+            {"id": "4", "name": "elodie","deck":"Elodie.json"},
+           {"id": "5", "name": "camille", "deck":"Camille.json"}]
 
 api = Flask(__name__,static_url_path='/static')
 
@@ -36,11 +42,20 @@ def get_students():
 
 @api.route("/deck", methods=['GET','POST'])
 def get_deck():
-  logging.info("request method: %s",request.method)
-  logging.info("request json : %s",request.json)
-  res =load_deck("Elodie.json",None,"/var/www/FlaskApp/FlaskApp/")
+  user_id = request.args.get('id')
+  deck = None
+  for user in students:
+    if user["id"]==user_id:
+      deck=user["deck"]
+  if deck is None:
+    deck="demo.json"
+    user_id="0"
+    
+  root_logger.info("request method: %s",request.method)
+  root_logger.info("request json : %s",request.json)
+  res =load_deck(deck,None,app_data_folder)
   
-  res =load_deck("Elodie.json",None,"/var/www/FlaskApp/FlaskApp/")
+  #res =load_deck("Elodie.json",None,"/var/www/FlaskApp/FlaskApp/")
   if request.method == 'GET':
   
     if not res.shuffled:
@@ -48,7 +63,6 @@ def get_deck():
     qs = res.shuffled
     deck = {}
     for q in qs:
-      logging.debug("GET -adding q: %s",q)
       deck[q]=res.json[q]
   elif request.method == 'POST':
     myjson = request.json
@@ -65,8 +79,7 @@ def get_deck():
     for q in qs:
       logging.debug("POST - adding q: %s",q)
       deck[q]=res.json[q] 
-  logging.debug("request: %s",request.method) 
-  logging.debug("submitted deck: %s",json.dumps(deck))
+  #logging.debug("submitted deck: %s",json.dumps(deck))
   return json.dumps(deck)
 
 @api.route('/student')
@@ -90,4 +103,9 @@ def index():
     #return index_html
 
 if __name__ == '__main__':
-    api.run(debug=True, port=5005)
+  logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
+  root_logger.setLevel(logging.DEBUG)
+  consoleHandler = logging.StreamHandler()
+  consoleHandler.setFormatter(logFormatter)
+  root_logger.addHandler(consoleHandler) 
+  api.run(debug=True, port=5005)
