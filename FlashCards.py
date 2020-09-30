@@ -359,6 +359,21 @@ def add_mult_tables(mul=6,mult=6,previous_deck=None):
             previous_deck.add_q_n_a("%s · %s"%(i,j),"%s"%(i*j),10)
     return previous_deck
 
+def add_div_tables(previous_deck=None,mul=10,mult=10):
+  """ create or add new divisions to deck """
+  if not previous_deck:
+    previous_deck = flash_card_deck()
+  qna = []
+  for i in range(1,mul+1):
+    for j in range(1,mul+1):
+      qna.append(("%s ÷ %s"%(i*j,j),"%s"%(i)))
+  random.shuffle(qna)
+  for q,a in qna:
+    previous_deck.add_q_n_a(q,a,10)
+  return previous_deck
+
+
+
 def deck_from_json(json_demo_deck=demo_json):
   new_deck = flash_card_deck()
   for v in json_demo_deck:
@@ -479,8 +494,8 @@ def load_deck(name,definition,root_folder=None):
     if exists(deck_fp):
         logging.info("loading existing deck: %s"%(name))
         deck = flash_card_deck(deck_fp)
-    elif name=="Elodie.json":
-        deck = definition()
+    if name=="Elodie.json" and not (definition is None):
+        deck = definition(deck)
         deck.set_fn(name)
         deck.set_shuffled()
     elif name=="Camille.json":
@@ -518,6 +533,12 @@ if __name__=="__main__":
     parser.add_argument('student', choices=known_students,
                     help='the name of the student')
 
+    parser.add_argument("next", choices=["practice","more"],
+              help="practice or add new skills to be practiced")
+
+    parser.add_argument("--function", "-f", choices=["add","mult","div"],
+            help = "if adding new skills to deck, choose which ones")
+
     args = parser.parse_args()
     args_dict = vars(args)
 
@@ -526,6 +547,13 @@ if __name__=="__main__":
     else:
         exit()
 
+    if args_dict["next"]=="more":
+      extend_deck = {"add":"","mult":"","div":"add_div_tables"}
+      flash_cards = load_deck(deck_name,eval(extend_deck[args_dict["function"]]),"./")
+      flash_cards.save_hdd()
+      exit()
+
+    #FROM NOW WE ARE IN PRACTICE MODE
     old_settings = termios.tcgetattr(sys.stdin)
     try:
         tty.setcbreak(sys.stdin.fileno())
