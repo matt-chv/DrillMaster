@@ -1,9 +1,18 @@
 # README
 
-All in one solution to help kids learn with advanced drilling solutions for times table, vocab cards, ...
+Adressing home schooling challenges, leveraging state of the art learning techniques (see [wiki article on SRS](https://en.wikipedia.org/wiki/Spaced_repetition)) to increase learning efficiency and reduce mental fatigue.
 
-* HTML5 client (jQuery+PWA) /Server (Flask) solution for flashcards 
-* Flashcards written in markdown and import/export in json file for easier manual or programmatic edits
+1. Paper-less solution (web centric) for skills and knowledge acquisition through drilling 
+2. Questions frequency inversely proportional to how well the answer is known
+3. Parent/ Tutor screens different from kids/students
+4. Taking paper based flash cards concepts to the age of portable screens (smarphone, laptops, ...)
+5. Fully under parental control (gettingn read of paywall, ...)
+
+## Technologies
+
+* Self-hosted solution (public hosting considered but not available)
+* HTML5 client (jQuery+[PWA](https://en.wikipedia.org/wiki/Progressive_web_application)) / Server (Apache2+Flask) solution for flashcards 
+* Flashcards written in json/markdown and import/export in json file for easier manual or programmatic edits
 * Frequency of question optimised as function of how well answer is remembered (see SRS below). Today SM2+ like, next A/B split testing SM2 vs SM19
 
 ## Usage
@@ -14,12 +23,12 @@ open in a web-browser http://your_server/drillmaster/
 
 start practicing :)
 
-## Installation
+### Installation
 
-### Install mod_wsgi
+#### Install mod_wsgi
 see onlin tutorials
 
-### Clone flask app 
+#### Clone flask app 
 
 ```bash
 cd /var/www/
@@ -35,7 +44,7 @@ flask run
 mv drillmaster.wsgi ..
 ```
 
-### Apache settings
+#### Apache settings
 
 ```wsgi
 WSGIScriptAlias /drillmaster /var/www/DrillMaster/drillmaster.wsgi
