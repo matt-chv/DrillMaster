@@ -1,5 +1,5 @@
 var xmlhttp = new XMLHttpRequest();
-var url = "/drillpractice/deck?id=1";
+var url = "/deck?id=1";
 
 xmlhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {

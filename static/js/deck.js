@@ -15,8 +15,18 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("GET", url, true);
 xmlhttp.send();
 */
-$("div").data("answers",[]);
-get_cards();
+function defer(method) {
+    if (window.jQuery){
+        $("div").data("answers",[]);
+
+        get_cards();
+    }
+    else {
+        console.log("waiting jQuery");
+        setTimeout(function() { defer(method) }, 50);
+    }
+}
+defer();
 
 function show_cards(data) {
   console.log("show deck0",data);
@@ -41,7 +51,7 @@ function push_answers() {
   // here we push the answers to the server
   //list of answer
       // answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
-  var myurl = "/drillmaster/deck";
+  var myurl = "/deck";
   console.log("pushing answers",$("div").data("answers"));
   json_str = JSON.stringify($("div").data("answers"));
   console.log("pushing json str",json_str);
@@ -65,7 +75,11 @@ function push_answers() {
 
 function get_cards() {
   //var xmlhttp = new XMLHttpRequest();
-  var myurl = "/drillmaster/deck?id=1";
+  var myurl = "/deck?id=1";
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const uid = urlParams.get('id');
+  var myurl = "deck?id="+uid;
   console.log("GET REQUEST",myurl);
   //$.get(url, function(data){show_cards(data)});
   $.ajax({
@@ -99,6 +113,7 @@ function validate_answer() {
   answer = document.getElementById("answer").innerHTML;
   question = document.getElementById("question").innerHTML;
   timer = document.getElementById("timer").innerHTML;
+  document.getElementById("timer").innerHTML = "15";
   timestamp = Date.now().toString();
   count = $("div").data("count").toString();
   console.log("mcv validating count",count);
@@ -112,7 +127,8 @@ function validate_answer() {
     {
       //right answer
 			// answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
-      $("div").data("answers").push({"question":question , "answer":answer,"number_attempts":count, "timestamp": timestamp, "timer": timer});
+      $("div").data("answers").push({"question":question , "answer":answer,"number_attempts":count, "timestamp": timestamp,
+           "timer": timer});
       q_index = parseInt(q_index);
       if (q_index< $("div").data("qna").length-1) {
         q_index+=1;

@@ -1,12 +1,13 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-"http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
   <head><title>Drill Master</title></head>
 <meta name="Description" content="Author: Matthieu Chevrier - Drill Master">
 <meta name="theme-color" content="#db5945">
-  <link rel="manifest" href="/drillmaster/static/manifest.json">
-  <link rel="shortcut icon" href="/drillmaster/static/favicon.ico">
-  <link rel="apple-touch-icon" href="/drillmaster/static/Science-Math-icon.png">
+<meta name="viewport" content="width=200, initial-scale=1">
+
+  <link rel="manifest" href="/manifest.json">
+  <link rel="shortcut icon" href="/static/favicon.ico">
+  <link rel="apple-touch-icon" href="/static/img/ios_180x180.png">
   <body>
     <h1>Welcome to Drill Master</h1>
     <h2> Students </h2>
@@ -30,11 +31,28 @@ function myFunction(arr) {
     var i;
     for(i = 0; i < arr.length; i++) {
       console.log(arr);
-        out += '<a href="/drillmaster/student?id=' + arr[i].id + '">' +
+        out += '<a href="/student?id=' + arr[i].id + '">' +
         arr[i].name + '</a><br>';
     }
     document.getElementById("students").innerHTML = out;
 }
 </script>
+<script>
+if ('serviceWorker' in navigator) {
+  // declaring scope manually
+  navigator.serviceWorker.register('/sw.js', {scope: './'}).then(function(registration) {
+    console.log('Service worker registration succeeded:', registration);
+  }, /*catch*/ function(error) {
+    console.log('Service worker registration failed:', error);
+  });
+} else {
+  console.log('Service workers are not supported.');
+}
+
+
+
+console.log("sw ran");
+</script>
+
   </body>
 </html>
