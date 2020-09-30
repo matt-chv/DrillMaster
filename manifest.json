@@ -1,0 +1,22 @@
+{
+    "name": "Drill Master",
+    "short_name": "DM",
+    "start_url":"/",
+    "icons": [
+        {
+          "src": "/static/img/Science-Math-icon-bw.png",
+          "type": "image/png",
+          "sizes": "512x512",
+          "purpose": "any maskable"
+        }],
+    "display":      "standalone", 
+    "orientation":  "landscape",
+    "theme_color": "#a300c4",
+    "background_color": "#c46a00",
+    "serviceworker": {
+      "src": "/sw.js",
+      "type": "",
+      "update_via_cache": "none",
+      "scope": "/"
+    }
+}
