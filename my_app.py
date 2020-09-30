@@ -5,12 +5,12 @@ v0.2: talks back to cars back-end
 
 #import standard modules
 import logging
-from os.path import join
+from os.path import exists, join
 from urllib.parse import unquote
 
 #import pip modules
 
-from flask import Flask, json, request, Response
+from flask import Flask, json, request, Response, send_from_directory
 
 #import own
 from FlashCards import load_deck
@@ -101,6 +101,18 @@ def favicon():
 def index():
     return api.send_static_file('index.html')
     #return index_html
+
+@api.route('/<path:filename>')
+def manifest(filename):
+  if filename=="manifest.json":
+    root_logger.info("returning manifest.json")
+    if exists(join("/var/www/DrillMaster/DrillMaster","manifest.json")):
+      root_logger.info("manifest exists")
+    else:
+      root_logger.info("manifest does not exists")
+    return send_from_directory("/var/www/DrillMaster/DrillMaster","manifest.json")
+  elif filename=="sw.js":
+    return send_from_directory("/var/www/DrillMaster/DrillMaster","sw.js")
 
 if __name__ == '__main__':
   logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")

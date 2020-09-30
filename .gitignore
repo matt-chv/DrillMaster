@@ -2,6 +2,8 @@
 static/cards/am6x.js
 static/cards/am6x_cores.js
 
+# sqlite3 db file
+*.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
