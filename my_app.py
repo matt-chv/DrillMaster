@@ -14,6 +14,7 @@ from flask import Flask, json, request, Response, send_from_directory
 
 #import own
 from FlashCards import load_deck
+from db import view_users_activities_log
 
 app_data_folder = "/var/www/DrillMaster/DrillMaster/"
 
@@ -81,6 +82,11 @@ def get_deck():
       deck[q]=res.json[q] 
   #logging.debug("submitted deck: %s",json.dumps(deck))
   return json.dumps(deck)
+
+@api.route('/educator')
+def educator():
+  df = view_users_activities_log()
+  return df.to_html()
 
 @api.route('/student')
 def student():
