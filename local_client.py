@@ -1,18 +1,18 @@
 import requests
+from sys import argv
 
-base_url = "http://localhost:5005/"
+base_url_dev = "http://localhost:5005"
+base_url_prod = "https://drillmaster.xyz"
 
-def get_decks():
-  deck_url = base_url + "deck?id=%s"
 
-  print("deck 4")
-  r=requests.get(deck_url%4)
-  print(r.content)
-  print("\n\ndeck 5")
-  r=requests.get(deck_url%5)
-  print(r.content)
-  r=requests.get(deck_url%1)
-  print(r.content)
+def get_decks(base_url=base_url_dev):
+  deck_url = base_url + "/deck?id=%s"
+  print(deck_url)
+  user_ids = [4]
+  for uid in user_ids:
+    r=requests.get(deck_url%uid)
+    print(r.content[:200])
+
 
 def push_answers():
   deck_url = base_url + "deck?id=%s"
@@ -21,4 +21,10 @@ def push_answers():
   r = requests.post(deck_url,json=json_deck,headers = {'Content-type': 'application/json'})
   print(r.content)
 
-push_answers()
+if __name__=="__main__":
+  server_url = base_url_dev
+  if argv[1]=="prod":
+    server_url = base_url_prod
+  get_decks(server_url)
+  print(argv)
+  #push_answers()

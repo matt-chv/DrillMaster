@@ -28,9 +28,9 @@ handler.setFormatter(formatter) # Pass handler as a parameter, not assign
 root_logger.addHandler(handler)
 
 
-students = [{"id":"0", "name": "demo", "deck":"demo.json"},
-            {"id": "4", "name": "elodie","deck":"Elodie.json"},
-           {"id": "5", "name": "camille", "deck":"Camille.json"}]
+students = [{"id":0, "name": "demo", "deck":"demo.json"},
+            {"id": '4', "name": "elodie","deck":"Elodie.json"},
+           {"id": 5, "name": "camille", "deck":"Camille.json"}]
 
 api = Flask(__name__,static_url_path='/static')
 
@@ -45,20 +45,21 @@ def get_students():
 def get_deck():
   user_id = request.args.get('id')
   deck = None
+  root_logger.debug("hello")
   for user in students:
     if user["id"]==user_id:
       deck=user["deck"]
   if deck is None:
     deck="demo.json"
     user_id="0"
-    
+  
+  
   root_logger.info("request method: %s",request.method)
   root_logger.info("request json : %s",request.json)
   res =load_deck(deck,None,app_data_folder)
   
   #res =load_deck("Elodie.json",None,"/var/www/FlaskApp/FlaskApp/")
   if request.method == 'GET':
-  
     if not res.shuffled:
       res.shuffle_cards()
     qs = res.shuffled

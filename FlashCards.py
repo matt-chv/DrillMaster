@@ -494,21 +494,26 @@ def load_deck(name,definition,root_folder=None):
     if exists(deck_fp):
         logging.info("loading existing deck: %s"%(name))
         deck = flash_card_deck(deck_fp)
-    if name=="Elodie.json" and not (definition is None):
+    else:
+        logging.info("requested deck name: %s, loading demo",name)
+        deck = deck_from_json()
+
+    if not (definition is None):
+      logging.info("loading definition : %s - for :%s",definition,deck)
+      if name=="Elodie.json" and not (definition is None):
+        logging.info("loading definition: %s",definition)
         deck = definition(deck)
         deck.set_fn(name)
         deck.set_shuffled()
-    elif name=="Camille.json":
+      elif name=="Camille.json":
         deck = definition()
         deck.set_fn(name)
-    elif name=="Papa.json":
+      elif name=="Papa.json":
         print("creating papa deck")
         deck = definition()
         deck.set_fn(name)
         deck.set_shuffled()
-    else:
-        logging.info("requested deck name: %s, loading demo",name)
-        deck = deck_from_json()
+
     return deck
 
 class Card_Display():
