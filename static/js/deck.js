@@ -52,8 +52,13 @@ function push_answers() {
   //list of answer
       // answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
   //post_answers
-  var myurl = "/answer";
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const uid = urlParams.get('id');
+  var myurl = "answer?id="+uid;
+
   console.log("pushing answers",$("div").data("answers"));
+  console.log("push url",myurl);
   json_str = JSON.stringify($("div").data("answers"));
   console.log("pushing json str",json_str);
   //$.post(url,json_str,function(data){show_cards(data)});

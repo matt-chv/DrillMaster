@@ -10,11 +10,11 @@ from urllib.parse import unquote
 
 #import pip modules
 
-from flask import Flask, json, request, Response, send_from_directory
+from flask import Flask, json, request, Response, send_from_directory, render_template
 
 #import own
 from FlashCards import load_deck
-from db import view_users_activities_log
+from db import view_users_activities_log, update_logs
 
 app_data_folder = "/var/www/DrillMaster/DrillMaster/"
 
@@ -28,9 +28,9 @@ handler.setFormatter(formatter) # Pass handler as a parameter, not assign
 root_logger.addHandler(handler)
 
 
-students = [{"id":0, "name": "demo", "deck":"demo.json"},
+students = [{"id": '0', "name": "demo", "deck":"demo.json"},
             {"id": '4', "name": "elodie","deck":"Elodie.json"},
-           {"id": 5, "name": "camille", "deck":"Camille.json"}]
+           {"id": '5', "name": "camille", "deck":"Camille.json"}]
 
 api = Flask(__name__,static_url_path='/static')
 
@@ -68,6 +68,7 @@ def post_answers():
       logging.debug("debug received card: %s",card[key])
     res.update_card(card["question"],float(card["timer"]),card["answer"],card["number_attempts"], card["timestamp"])
     res.save_hdd()
+    update_logs(user_id,myjson,res)
   qs = []
   for i in range(10):
     qs.append(res.next_q())
@@ -82,7 +83,7 @@ def post_answers():
 def get_deck():
   user_id = request.args.get('id')
   deck = None
-  root_logger.debug("hello")
+  root_logger.debug("hello student id: %s", user_id)
   for user in students:
     if user["id"]==user_id:
       deck=user["deck"]
@@ -124,7 +125,10 @@ def get_deck():
 @api.route('/educator')
 def educator():
   df = view_users_activities_log()
-  return df.to_html()
+  records = df.to_dict('records')
+  columns = df.columns
+  return render_template('record.html', records=records, colnames=columns)
+  #return df.to_html()
 
 @api.route('/student')
 def student():

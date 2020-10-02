@@ -330,7 +330,7 @@ class flash_card_deck:
 
                 shufled = self.unknown_deck.copy()
                 random.shuffle(shufled)
-                self.shuffled = shufled   
+                self.shuffled = shufled[:3]   
             else:
                 log_msg = "random draw for drilling"
                 logging.info(log_msg)
