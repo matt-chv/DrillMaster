@@ -51,7 +51,8 @@ function push_answers() {
   // here we push the answers to the server
   //list of answer
       // answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
-  var myurl = "/deck";
+  //post_answers
+  var myurl = "/answer";
   console.log("pushing answers",$("div").data("answers"));
   json_str = JSON.stringify($("div").data("answers"));
   console.log("pushing json str",json_str);

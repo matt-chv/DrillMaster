@@ -41,7 +41,44 @@ api.config["APPLICATION_ROOT"] = "/drillmaster"
 def get_students():
   return json.dumps(students)
 
-@api.route("/deck", methods=['GET','POST'])
+
+@api.route("/answer", methods=['POST'])
+def post_answers():
+  user_id = request.args.get('id')
+  myjson = request.json
+  root_logger.debug("entering answer")
+  logging.debug("received json: %s",json.dumps(myjson))
+  
+  deck = None
+  for user in students:
+    root_logger.debug("user: %s---%s",user["id"],user_id)
+    if user["id"]==user_id:
+      deck=user["deck"]
+  
+  if deck is None:
+    deck="demo.json"
+    user_id="0"
+  
+  root_logger.info("request method: %s",request.method)
+  root_logger.info("request json : %s",request.json)
+  res =load_deck(deck,None,app_data_folder)
+
+  for card in myjson:
+    for key in card:
+      logging.debug("debug received card: %s",card[key])
+    res.update_card(card["question"],float(card["timer"]),card["answer"],card["number_attempts"], card["timestamp"])
+    res.save_hdd()
+  qs = []
+  for i in range(10):
+    qs.append(res.next_q())
+  deck = {}
+  for q in qs:
+    logging.debug("POST - adding q: %s",q)
+    deck[q]=res.json[q]
+  return json.dumps(deck)
+
+
+@api.route("/deck", methods=['GET'])
 def get_deck():
   user_id = request.args.get('id')
   deck = None

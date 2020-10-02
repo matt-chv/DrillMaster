@@ -27,7 +27,8 @@ ISO8601 = "%Y-%m-%dT%H:%M:%S"
 
 demo_json = {  "1 + 1": "2",
   "6 \u00b7 8": "48",
-  "\u221A 10 \u2245 (1 digit) ": "3"
+  "\u221A 10 \u2245 (1 digit) ": "3",
+  "女(enter pinyin tone (1..4)":"3"
 }
 
 class flash_card_deck:
