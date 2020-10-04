@@ -30,7 +30,9 @@ root_logger.addHandler(handler)
 
 students = [{"id": '0', "name": "demo", "deck":"demo.json"},
             {"id": '4', "name": "elodie","deck":"Elodie.json"},
-           {"id": '5', "name": "camille", "deck":"Camille.json"}]
+           {"id": '5', "name": "camille", "deck":"Camille.json"},
+          {"id": '6', "name": "Anthony", "deck":"Anthony.json"}  
+          ]
 
 api = Flask(__name__,static_url_path='/static')
 

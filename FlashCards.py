@@ -32,10 +32,16 @@ demo_json = {  "1 + 1": "2",
 }
 
 class flash_card_deck:
+    """
+    properties:
+    -----------
+    json: the json of Q&A
+    """
     fn = None
     this_session_good = 0
     this_session_bad = 0
     shuffled = []
+    json = {}
     def __init__(self,fp=None):
         logger.info("INIT DECK")
         print("INIT DECK")

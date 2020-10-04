@@ -18,14 +18,14 @@ def delete_db():
   con = sqlite3.connect(db_path)
   cursor = con.cursor()
   cursor.execute("DROP TABLE users")
-  cursor.execute("DROP TABLE questions")
+  #cursor.execute("DROP TABLE questions")
   #cursor.execute("DROP TABLE history")
 
 def create_db():
   con = sqlite3.connect(db_path)
   cursor = con.cursor()
   cursor.execute('PRAGMA encoding="UTF-8";')
-  cursor.execute(" CREATE TABLE IF NOT EXISTS USERS( ID INTEGER PRIMARY KEY, NAME TEXT)")
+  cursor.execute(" CREATE TABLE IF NOT EXISTS USERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
   cursor.execute(" CREATE TABLE IF NOT EXISTS QUESTIONS( ID INTEGER PRIMARY KEY, Q_TEXT TEXT)")
   cursor.execute(" CREATE TABLE IF NOT EXISTS HISTORY (\
     TIME TIMESTAMP,\
@@ -38,8 +38,10 @@ def create_db():
     FOREIGN KEY (Q_ID) REFERENCES questions(id),\
     FOREIGN KEY (U_ID) REFERENCES users(id)\
     );")
-  #cursor.execute(" INSERT INTO users (id, name) VALUES (0, 'Demo')")
-  #cursor.execute(" INSERT INTO users (id, name) VALUES (1, 'Demo')")
+  cursor.execute(" INSERT INTO users (id, name) VALUES (0, 'Papa Mama')")
+  cursor.execute(" INSERT INTO users (id, name) VALUES (1, 'Dermot')")
+  cursor.execute(" INSERT INTO users (id, name) VALUES (2, 'Alannah')")
+  cursor.execute(" INSERT INTO users (id, name) VALUES (3, 'Shavaun')")
   cursor.execute(" INSERT INTO users (id, name) VALUES (4, 'Elodie')")
   cursor.execute(" INSERT INTO users (id, name) VALUES (5, 'Camille')")
   con.commit()
@@ -115,12 +117,33 @@ def remove_ts():
   con.commit()
   con.close()
 
+def get_users():
+  con = sqlite3.connect(db_path)
+  df = pd.read_sql_query("SELECT * FROM users",con)
+  return df
 
+def add_user(name):
+  con = sqlite3.connect(db_path)
+  cursor = con.cursor()
+  print(name)
+  name = (None,name)
+  cursor.execute(" INSERT INTO USERS(ID, NAME) VALUES (?,?)",name)
+  last_id = cursor.lastrowid
+  print("last1",last_id)
+  con.commit()
+  last_id2 = cursor.last_id
+  print("last2",last_id2)
+  con.close()
+  last_id3 = cursor.last_id
+  print("last3",last_id3)
 
 if __name__=="__main__":
   #delete_db()
   #create_db()
   #add_a_deck_log()
-  remove_ts()
+  #remove_ts()
+  df = get_users()
+  print(df)
+  #add_user("Anthony")
   df = view_users_activities_log()
   print(df)
