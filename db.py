@@ -97,14 +97,13 @@ def view_users_activities_log():
   df = pd.read_sql_query("SELECT * FROM history",con)
   dfu = pd.read_sql_query("SELECT * FROM users",con)
   df = df.merge(dfu, how="left", left_on="U_ID", right_on="ID")
-  print(df)
-  print("-"*15)
-  print(dfu)
+  df = df.sort_values(by="TIME",ascending=False)
   df['TIME']=df['TIME'].apply(lambda x: pd.datetime.fromtimestamp(x).date())
   df['GOOD']=(df['ANSWER']==df['EXPECTED_ANSWER']).astype(int)
   #g = df.groupby(pd.DatetimeIndex(df['TIME']).normalize()).count()
   df = df[['TIME','NAME','ANSWER','GOOD']]
   g = df.groupby(by=['TIME','NAME']).agg({'GOOD':'sum','ANSWER':'count'}).reset_index()
+  g = g.sort_values(by="TIME",ascending=False)
   return g
 
 def remove_ts():
