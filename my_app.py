@@ -14,7 +14,7 @@ from flask import Flask, json, request, Response, send_from_directory, render_te
 
 #import own
 from FlashCards import load_deck
-from db import view_users_activities_log, update_logs
+from db import view_users_activities_log, update_logs, get_df_db
 
 app_data_folder = "/var/www/DrillMaster/DrillMaster/"
 
@@ -70,7 +70,7 @@ def post_answers():
       logging.debug("debug received card: %s",card[key])
     res.update_card(card["question"],float(card["timer"]),card["answer"],card["number_attempts"], card["timestamp"])
     res.save_hdd()
-    update_logs(user_id,myjson,res)
+  update_logs(user_id,myjson,res)
   qs = []
   for i in range(10):
     qs.append(res.next_q())
@@ -123,6 +123,13 @@ def get_deck():
       deck[q]=res.json[q] 
   #logging.debug("submitted deck: %s",json.dumps(deck))
   return json.dumps(deck)
+
+@api.route("/log")
+def logs():
+  df = get_df_db("SELECT * FROM HISTORY")
+  records = df.to_dict('records')
+  columns = df.columns
+  return render_template('record.html', records=records, colnames=columns)
 
 @api.route('/educator')
 def educator():
