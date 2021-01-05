@@ -1,6 +1,7 @@
 # Own dev files:
 static/cards/am6x.js
 static/cards/am6x_cores.js
+*.json
 
 # sqlite3 db file
 *.db
