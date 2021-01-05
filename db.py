@@ -86,20 +86,30 @@ def update_logs(user_id,answers,deck):
     uid = str(user_id)
     
     many_inserts.append((ts, answer,expected, time_to_answer,ttta,qid,uid))
+  logger.warning("many inserts")
+  logger.warning(many_inserts)
   cursor.executemany(" INSERT INTO 'history' values ( ?, ?, ?, ?, ?, ?, ? ); ", many_inserts )
   con.commit()
   con.close()
   logging.info("db update done")
 
+def get_df_db(sql_query):
+  """ returns a dataframe from the database
+  wrapper for the db access
+  """
+  con = sqlite3.connect(db_path)
+  df = pd.read_sql_query(sql_query, con)
+  return df
 
 def view_users_activities_log():
-  con = sqlite3.connect(db_path)
-  df = pd.read_sql_query("SELECT * FROM history",con)
-  dfu = pd.read_sql_query("SELECT * FROM users",con)
+  df = get_df_db("SELECT * FROM history")
+  dfu = get_df_db("SELECT * FROM users")
   df = df.merge(dfu, how="left", left_on="U_ID", right_on="ID")
   df = df.sort_values(by="TIME",ascending=False)
   df['TIME']=df['TIME'].apply(lambda x: pd.datetime.fromtimestamp(x).date())
   df['GOOD']=(df['ANSWER']==df['EXPECTED_ANSWER']).astype(int)
+  print(df.head(10))
+  print("-------")
   #g = df.groupby(pd.DatetimeIndex(df['TIME']).normalize()).count()
   df = df[['TIME','NAME','ANSWER','GOOD']]
   g = df.groupby(by=['TIME','NAME']).agg({'GOOD':'sum','ANSWER':'count'}).reset_index()
@@ -111,8 +121,8 @@ def remove_ts():
   cursor = con.cursor()
 
   #cursor.execute("DELETE from history WHERE TIME>=1609372800;")
-  cursor.execute("DELETE from history WHERE U_ID='5';")
   cursor.execute("DELETE from history WHERE U_ID='4';")
+  #cursor.execute("DELETE from history WHERE U_ID='6';")
   con.commit()
   con.close()
 
@@ -140,9 +150,10 @@ if __name__=="__main__":
   #delete_db()
   #create_db()
   #add_a_deck_log()
-  #remove_ts()
-  df = get_users()
-  print(df)
+  remove_ts()
+  #df = get_users()
+  #print(df)
   #add_user("Anthony")
-  df = view_users_activities_log()
-  print(df)
+  #df = view_users_activities_log()
+  #print(df)
+  #print(get_df_db("SELECT * FROM HISTORY"))
