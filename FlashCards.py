@@ -17,8 +17,8 @@ import random
 import sys
 import select
 import time
-import tty
-import termios
+#import tty
+#import termios
 
 EXCEPTION_ESCAPED = "ESC pressed"
 msg_bravo = "bravo     "
