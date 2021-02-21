@@ -2,6 +2,7 @@
 
 #standard modules
 import logging
+from os import environ
 
 
 #PIP modules
@@ -11,8 +12,41 @@ import pandas as pd
 import sqlite3
 from datetime import datetime
 
-db_path = "/var/www/DrillMaster/DrillMaster/DrillMaster.db"
+if environ['FLASK_ENV']=="development":
+  db_path = "DrillMaster.sqllite"
+else:
+  db_path = "/var/www/DrillMaster/DrillMaster/DrillMaster.db"
 logger = logging.getLogger()
+
+def get_db():
+    """Opens a new database connection if there is none yet for the
+    current application context.
+    """
+    #if not hasattr(g, 'sqlite_db'):
+      #g.sqlite_db = connect_db()
+    con = connect_db()
+    #return g.sqlite_db
+    return con
+
+def init_db():
+    db = get_db()
+
+    with open('schema.sql', 'r') as f:
+        db.cursor().executescript(f.read())
+    db.commit()
+
+def connect_db():
+    """Connects to the specific database."""
+    #rv = sqlite3.connect(app.config['DATABASE'])
+    con = sqlite3.connect(db_path)
+    #rv.row_factory = sqlite3.Row
+    #return rv
+    return con
+
+
+
+
+
 
 def delete_db():
   con = sqlite3.connect(db_path)
@@ -20,32 +54,6 @@ def delete_db():
   cursor.execute("DROP TABLE users")
   #cursor.execute("DROP TABLE questions")
   #cursor.execute("DROP TABLE history")
-
-def create_db():
-  con = sqlite3.connect(db_path)
-  cursor = con.cursor()
-  cursor.execute('PRAGMA encoding="UTF-8";')
-  cursor.execute(" CREATE TABLE IF NOT EXISTS USERS( ID INTEGER PRIMARY KEY AUTOINCREMENT, NAME TEXT)")
-  cursor.execute(" CREATE TABLE IF NOT EXISTS QUESTIONS( ID INTEGER PRIMARY KEY, Q_TEXT TEXT)")
-  cursor.execute(" CREATE TABLE IF NOT EXISTS HISTORY (\
-    TIME TIMESTAMP,\
-    ANSWER TEXT,\
-    EXPECTED_ANSWER TEXT,\
-    TIME_TO_ANSWER INTEGER,\
-    TARGET_TIME_TO_ANSWER INTEGER,\
-    Q_ID INTEGER,\
-    U_ID INTEGER,\
-    FOREIGN KEY (Q_ID) REFERENCES questions(id),\
-    FOREIGN KEY (U_ID) REFERENCES users(id)\
-    );")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (0, 'Papa Mama')")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (1, 'Dermot')")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (2, 'Alannah')")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (3, 'Shavaun')")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (4, 'Elodie')")
-  cursor.execute(" INSERT INTO users (id, name) VALUES (5, 'Camille')")
-  con.commit()
-  con.close()
   
 def add_a_deck_log():
   #example from : https://stackoverflow.com/a/14814039/1167333
@@ -80,15 +88,16 @@ def update_logs(user_id,answers,deck):
     answer = a["answer"]
     expected = deck.json[a["question"]]["answer"]
     logger.warning("expected: %s",expected)
-    time_to_answer = 15*a["number_attempts"]+a["timer"]
+    time_to_answer = a["timer"]
+    number_attempts = a["number_attempts"]
     ttta = 15 #target time to answer
     qid = 0
     uid = str(user_id)
     
-    many_inserts.append((ts, answer,expected, time_to_answer,ttta,qid,uid))
+    many_inserts.append((ts, answer,expected, time_to_answer, ttta,number_attempts,qid,uid))
   logger.warning("many inserts")
   logger.warning(many_inserts)
-  cursor.executemany(" INSERT INTO 'history' values ( ?, ?, ?, ?, ?, ?, ? ); ", many_inserts )
+  cursor.executemany(" INSERT INTO 'history' values ( ?, ?, ?, ?, ?, ?, ?, ? ); ", many_inserts )
   con.commit()
   con.close()
   logging.info("db update done")
@@ -108,11 +117,13 @@ def view_users_activities_log():
   df = df.sort_values(by="TIME",ascending=False)
   df['TIME']=df['TIME'].apply(lambda x: pd.datetime.fromtimestamp(x).date())
   df['GOOD']=(df['ANSWER']==df['EXPECTED_ANSWER']).astype(int)
+
   print(df.head(10))
   print("-------")
   #g = df.groupby(pd.DatetimeIndex(df['TIME']).normalize()).count()
-  df = df[['TIME','NAME','ANSWER','GOOD']]
-  g = df.groupby(by=['TIME','NAME']).agg({'GOOD':'sum','ANSWER':'count'}).reset_index()
+  df = df[['TIME','NAME','NUMBER_ATTEMPTS','GOOD']]
+  g = df.groupby(by=['TIME','NAME']).agg({'GOOD':'sum','NUMBER_ATTEMPTS':'sum'}).reset_index()
+  g['NUMBER_ATTEMPTS']+=g['GOOD']
   g = g.sort_values(by="TIME",ascending=False)
   return g
 
@@ -147,10 +158,13 @@ def add_user(name):
   print("last3",last_id3)
 
 if __name__=="__main__":
+  print(environ['FLASK_ENV'])
   #delete_db()
   #create_db()
   #add_a_deck_log()
-  remove_ts()
+
+  #remove_ts()
+
   #df = get_users()
   #print(df)
   #add_user("Anthony")

@@ -5,18 +5,21 @@ v0.2: talks back to cars back-end
 
 #import standard modules
 import logging
-from os.path import exists, join
+from os.path import abspath, exists, join, pardir
+from os import environ
 from urllib.parse import unquote
 
 #import pip modules
-
 from flask import Flask, json, request, Response, send_from_directory, render_template
 
 #import own
-from FlashCards import load_deck
-from db import view_users_activities_log, update_logs, get_df_db
+from .FlashCards import load_deck
+from .db import init_db, view_users_activities_log, update_logs, get_df_db
 
-app_data_folder = "/var/www/DrillMaster/DrillMaster/"
+if environ['FLASK_ENV'] == 'prod':
+    app_data_folder = "/var/www/DrillMaster/DrillMaster/"
+else:
+    app_data_folder = abspath(join(__file__,pardir))
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
@@ -170,6 +173,12 @@ def manifest(filename):
     return send_from_directory("/var/www/DrillMaster/DrillMaster","manifest.json")
   elif filename=="sw.js":
     return send_from_directory("/var/www/DrillMaster/DrillMaster","sw.js")
+
+@api.cli.command('initdb')
+def initdb_command():
+    """Initializes the database."""
+    init_db()
+    print('Initialized the database.')
 
 if __name__ == '__main__':
   logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
