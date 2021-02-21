@@ -118,10 +118,11 @@ function validate_answer() {
   // code to be executed
   answer = document.getElementById("answer").innerHTML;
   question = document.getElementById("question").innerHTML;
-  timer = document.getElementById("timer").innerHTML;
-  document.getElementById("timer").innerHTML = "15";
+  //timer = document.getElementById("timer").innerHTML;
+  timer = parseInt(document.getElementById("timer").innerHTML);
+  document.getElementById("timer").innerHTML = 15; //"15"
   timestamp = Date.now().toString();
-  count = $("div").data("count").toString();
+  count = $("div").data("count");
   console.log("mcv validating count",count);
   lang = "fr";
 // here if we validate the answer
@@ -132,7 +133,8 @@ function validate_answer() {
     if (answer===q_answer)
     {
       //right answer
-			// answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
+      // answer: q, timestamp, answer, ok/nok, delta_time, number_attemps
+      console.log("timer is",typeof timer)
       $("div").data("answers").push({"question":question , "answer":answer,"number_attempts":count, "timestamp": timestamp,
            "timer": timer});
       q_index = parseInt(q_index);
@@ -142,7 +144,7 @@ function validate_answer() {
         $("div").data("count",0);
         document.getElementById("question").innerHTML = $("div").data("qna")[q_index].question;
         document.getElementById("answer").innerHTML = "???";
-        document.getElementById("timer").innerHTML = "15";
+        document.getElementById("timer").innerHTML = 15; //"15"
         document.getElementById("status").innerHTML += '<div class="tick">✔</div>';
       }
       else {
@@ -167,7 +169,7 @@ function validate_answer() {
     else
     {
       //wrong answer reset what is written
-      console.log("140");
+      console.log("172 entering wrong answer code branch");
       $("div").data("count",count+1);      
       document.getElementById("answer").innerHTML = "";
       document.getElementById("status").innerHTML += '<div class="cross">x</div>';
