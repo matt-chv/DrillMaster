@@ -5,6 +5,7 @@ static/cards/am6x_cores.js
 
 # sqlite3 db file
 *.db
+*.sqllite
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
