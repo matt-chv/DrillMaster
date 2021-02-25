@@ -12,9 +12,9 @@ import pandas as pd
 import sqlite3
 from datetime import datetime
 
-print(15, "--%s--"%(environ['FLASK_ENV']),environ['FLASK_ENV']=="development")
-if environ['FLASK_ENV']=="development":
-  db_path = "DrillMaster.sqllite"
+if 'FLASK_ENV' in environ:
+  if environ['FLASK_ENV']=="development":
+    db_path = "DrillMaster.sqllite"
 else:
   db_path = "/var/www/DrillMaster/DrillMaster/DrillMaster.db"
 logger = logging.getLogger()
