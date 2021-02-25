@@ -12,6 +12,7 @@ import pandas as pd
 import sqlite3
 from datetime import datetime
 
+print(15, "--%s--"%(environ['FLASK_ENV']),environ['FLASK_ENV']=="development")
 if environ['FLASK_ENV']=="development":
   db_path = "DrillMaster.sqllite"
 else:
@@ -35,18 +36,24 @@ def init_db():
         db.cursor().executescript(f.read())
     db.commit()
 
+def upgrade_db():
+  db = get_db()
+  with open('upgrade_scheme.sql', 'r') as f:
+    db.cursor().executescript(f.read())
+  db.commit()
+
 def connect_db():
     """Connects to the specific database."""
     #rv = sqlite3.connect(app.config['DATABASE'])
-    con = sqlite3.connect(db_path)
+    try:
+      con = sqlite3.connect(db_path)
+    except:
+      print(50,db_path)
+      logging.error("db_path",db_path)
+      raise
     #rv.row_factory = sqlite3.Row
     #return rv
     return con
-
-
-
-
-
 
 def delete_db():
   con = sqlite3.connect(db_path)
