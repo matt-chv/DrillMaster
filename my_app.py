@@ -1,6 +1,6 @@
 """
 v0.1: shows cards, talks back, checks answers
-v0.2: talks back to cars back-end
+v0.2: talks back to cards back-end
 """
 
 #import standard modules
@@ -13,11 +13,12 @@ from urllib.parse import unquote
 from flask import Flask, json, request, Response, send_from_directory, render_template
 
 #import own
-from .FlashCards import load_deck
-from .db import init_db, view_users_activities_log, update_logs, get_df_db
+from FlashCards import load_deck
+from db import init_db, upgrade_db, view_users_activities_log, update_logs, get_df_db
 
-if environ['FLASK_ENV'] == 'prod':
-    app_data_folder = "/var/www/DrillMaster/DrillMaster/"
+if 'FLASK_ENV' in environ:
+  if environ['FLASK_ENV'] == 'prod':
+      app_data_folder = "/var/www/DrillMaster/DrillMaster/"
 else:
     app_data_folder = abspath(join(__file__,pardir))
 
@@ -179,6 +180,12 @@ def initdb_command():
     """Initializes the database."""
     init_db()
     print('Initialized the database.')
+
+@api.cli.command('upgradedb')
+def initdb_command():
+    """Upgrades the database."""
+    upgrade_db()
+    print('Upgrade the database.')
 
 if __name__ == '__main__':
   logFormatter = logging.Formatter("%(asctime)s [%(threadName)-12.12s] [%(levelname)-5.5s]  %(message)s")
