@@ -348,36 +348,7 @@ class flash_card_deck:
 def isData():
     return select.select([sys.stdin], [], [], 0) == ([sys.stdin], [], [])
 
-def summ_tables(add=20,summ=20):
-    logger.debug("creating 20+20")
-    summs_deck = flash_card_deck()
-    print("test",summs_deck) 
-    for i in range(1, add +1):
-        for j in range(1, summ +1):
-            summs_deck.add_q_n_a("%s + %s"%(i,j),"%s"%(i+j),15)
-    return summs_deck
 
-def add_mult_tables(mul=6,mult=6,previous_deck=None):
-    """ creates or add new tables Q&A """
-    if not previous_deck:
-        previous_deck = flash_card_deck()
-    for i in range(1,mul+1):
-        for j in range(1,mul+1):
-            previous_deck.add_q_n_a("%s · %s"%(i,j),"%s"%(i*j),10)
-    return previous_deck
-
-def add_div_tables(previous_deck=None,mul=10,mult=10):
-  """ create or add new divisions to deck """
-  if not previous_deck:
-    previous_deck = flash_card_deck()
-  qna = []
-  for i in range(1,mul+1):
-    for j in range(1,mul+1):
-      qna.append(("%s ÷ %s"%(i*j,j),"%s"%(i)))
-  random.shuffle(qna)
-  for q,a in qna:
-    previous_deck.add_q_n_a(q,a,10)
-  return previous_deck
 
 
 
@@ -387,46 +358,7 @@ def deck_from_json(json_demo_deck=demo_json):
     new_deck.add_q_n_a(v, json_demo_deck[v],15)
   return new_deck
     
-def timed_input(buffer = "", timeout = 10):
 
-    result = buffer
-    time_spent = 0
-    s_steps = 0.05
-    s = 0
-    count_down = int(timeout/s_steps)
-    show_countdown = False
-    crlf_pressed = False
-
-    for remaining in range(count_down, 0, -1):
-        if show_countdown:
-            sys.stdout.write("\r%2d seconds remaining, answer: %s"%(int(remaining*s_steps), result)) 
-        else:
-            sys.stdout.write("\r%s    "%(result)) 
-        sys.stdout.flush()
-        
-        time.sleep(s_steps)
-        s += s_steps
-        time_spent +=s_steps
-        if s >=1/s_steps:
-            s -=1/s_steps
-            sys.stdout.write("\r")
-            sys.stdout.write("\r%s    "%(result)) 
-            
-            sys.stdout.flush()
-        
-        if isData():
-            c = sys.stdin.read(1)
-            if c == '\x1b':         # x1b is ESC
-                raise Exception(EXCEPTION_ESCAPED)
-            elif ord(c) == 10 or ord(c)==13:
-                crlf_pressed = True
-                break
-            elif ord(c) == 127:
-                #backspace
-                result = result[:-1]
-            else:
-                result +=c
-    return(result, crlf_pressed, time_spent)
 
 def show_flash_cards(flash_cards,total_time_s):
 
@@ -502,7 +434,7 @@ def load_deck(name,definition,root_folder=None):
         logging.info("loading existing deck: %s"%(name))
         deck = flash_card_deck(deck_fp)
     else:
-        logging.info("requested deck name: %s, loading demo",name)
+        logging.info(f"requested deck name: {name}, cannot find {deck_fp} - loading demo",)
         deck = deck_from_json()
 
     if not (definition is None):

@@ -18,9 +18,13 @@ from db import init_db, upgrade_db, view_users_activities_log, update_logs, get_
 
 if 'FLASK_ENV' in environ:
   if environ['FLASK_ENV'] == 'prod':
-      app_data_folder = "/var/www/DrillMaster/DrillMaster/"
-else:
+    app_data_folder = "/var/www/DrillMaster/DrillMaster/"
+    deck_path = join(app_data_folder,"decks")
+  else:
     app_data_folder = abspath(join(__file__,pardir))
+    deck_path = join(app_data_folder,"decks")
+else:
+  logging.error("MISSING FLASK_ENV for proper operation")
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
@@ -34,8 +38,8 @@ root_logger.addHandler(handler)
 
 students = [{"id": '0', "name": "demo", "deck":"demo.json"},
             {"id": '4', "name": "elodie","deck":"Elodie.json"},
-           {"id": '5', "name": "camille", "deck":"Camille.json"},
-          {"id": '6', "name": "Anthony", "deck":"Anthony.json"}  
+           {"id": '5', "name": "camille", "deck":"number_bound_10_100.json"},
+          {"id": '6', "name": "Anthony", "deck":"number_bound_1_20.json"}    
           ]
 
 api = Flask(__name__,static_url_path='/static')
@@ -67,7 +71,7 @@ def post_answers():
   
   root_logger.info("request method: %s",request.method)
   root_logger.info("request json : %s",request.json)
-  res =load_deck(deck,None,app_data_folder)
+  res =load_deck(deck,None,root_folder=deck_path)
 
   for card in myjson:
     for key in card:
@@ -100,7 +104,7 @@ def get_deck():
   
   root_logger.info("request method: %s",request.method)
   root_logger.info("request json : %s",request.json)
-  res =load_deck(deck,None,app_data_folder)
+  res =load_deck(deck,None,root_folder=deck_path)
   
   #res =load_deck("Elodie.json",None,"/var/www/FlaskApp/FlaskApp/")
   if request.method == 'GET':
