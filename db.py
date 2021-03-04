@@ -15,8 +15,8 @@ from datetime import datetime
 if 'FLASK_ENV' in environ:
   if environ['FLASK_ENV']=="development":
     db_path = "DrillMaster_dev.sqllite"
-else:
-  db_path = "/var/www/DrillMaster/DrillMaster/DrillMaster.db"
+  else:
+    db_path = "/var/www/DrillMaster/DrillMaster/DrillMaster.db"
 logger = logging.getLogger()
 
 def get_db():
