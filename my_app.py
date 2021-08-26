@@ -24,7 +24,9 @@ if 'FLASK_ENV' in environ:
     app_data_folder = abspath(join(__file__,pardir))
     deck_path = join(app_data_folder,"decks")
 else:
-  logging.error("MISSING FLASK_ENV for proper operation")
+    app_data_folder = "/var/www/DrillMaster/DrillMaster/"
+    deck_path = join(app_data_folder,"decks")
+    logging.error("MISSING FLASK_ENV for proper operation")
 
 root_logger= logging.getLogger()
 root_logger.setLevel(logging.DEBUG)
