@@ -1,0 +1,32 @@
+{
+  "女 (pinyin tone)": {
+    "answer": "1",
+    "count_good": 0,
+    "count_bad": 0,
+    "timeout": 15,
+    "due": "1970-01-01T00:00:00",
+    "successful_repetitions": 0,
+    "interval_s": 1,
+    "ease_factor": 1.3
+  },
+  "√10 (int. value)": {
+    "answer": "3",
+    "count_good": 0,
+    "count_bad": 0,
+    "timeout": 15,
+    "due": "1970-01-01T00:00:00",
+    "successful_repetitions": 0,
+    "interval_s": 1,
+    "ease_factor": 1.3
+  },
+  "1 + 1": {
+    "answer": "2",
+    "count_good": 0,
+    "count_bad": 0,
+    "timeout": 15,
+    "due": "1970-01-01T00:00:00",
+    "successful_repetitions": 0,
+    "interval_s": 1,
+    "ease_factor": 1.3
+  }
+}
