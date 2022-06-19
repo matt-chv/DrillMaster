@@ -72,11 +72,12 @@ jobs:
           echo now running a2ensite
           sudo a2ensite dev.drillmaster.conf
           sudo systemctl restart apache2
+      - name: show log folder rights
+        run: ls -l /var/log/apache2/
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
           wget localhost
-          cat index.html
           echo done with local
           wget localhost/drillmaster
           cat index.html
