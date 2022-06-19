@@ -59,6 +59,10 @@ jobs:
       # move apache virtual host to folder
       - name: mv virtual site to folder
         run: |
+          ls /etc/apache2/
+          echo now sites available
+          ls /etc/apache2/sites-available/
+          echo now move virtual host in place
           sudo mv ./rsc/dev.drillmaster.conf /etc/apache2/sites-available/
           a2ensite dev.drillmaster.conf
           systemctl restart apache2
