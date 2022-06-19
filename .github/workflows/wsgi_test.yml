@@ -54,7 +54,7 @@ jobs:
           ls -l /var/www/
           sudo mkdir -p /var/www/DrillMaster/
           ls -l /var/www/
-          ls -l /var/www/DrilMaster/
+          ls -l /var/www/DrillMaster/
           cp rsc/dev.drillmaster.conf /var/www/DrillMaster/drillmaster.wsgi
       # move apache virtual host to folder
       - name: mv virtual site to folder
