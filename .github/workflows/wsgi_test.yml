@@ -56,7 +56,7 @@ jobs:
           sudo mv drillmaster.wsgi /var/www/DrillMaster/
           sudo cp -r * /var/www/DrillMaster/DrillMaster/
           sudo chown -R www-data /var/www/DrillMaster/DrillMaster/
-          touch /var/www/DrillMaster/DrillMaster/debug.log
+          sudo touch /var/www/DrillMaster/DrillMaster/debug.log
           sudo chmod 777 /var/www/DrillMaster/DrillMaster/*.log
       # move apache virtual host to folder
       - name: mv virtual site to folder
