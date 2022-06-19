@@ -62,8 +62,11 @@ jobs:
           ls /etc/apache2/
           echo now sites available
           ls /etc/apache2/sites-available/
+          echo now check rsc
+          ls -l ./rsc/
           echo now move virtual host in place
           sudo mv ./rsc/dev.drillmaster.conf /etc/apache2/sites-available/
+          echo now running a2ensite
           a2ensite dev.drillmaster.conf
           systemctl restart apache2
       # Runs a single command using the runners shell
