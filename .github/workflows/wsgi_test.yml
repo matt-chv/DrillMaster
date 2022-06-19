@@ -55,11 +55,11 @@ jobs:
           sudo mkdir -p /var/www/DrillMaster/
           ls -l /var/www/
           ls -l /var/www/DrillMaster/
-          mv ./rsc/dev.drillmaster.conf /var/www/DrillMaster/drillmaster.wsgi
+          mv ./rsc/dev.drillmaster.conf /var/www/DrillMaster/
       # move apache virtual host to folder
       - name: mv virtual site to folder
         run: |
-          cp drillmaster.wsgi /etc/apache2/sites-available/drillmaster.wsgi
+          mv drillmaster.conf /etc/apache2/sites-available/
           a2ensite drillmaster.conf
           systemctl restart apache2
       # Runs a single command using the runners shell
