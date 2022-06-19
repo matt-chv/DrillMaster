@@ -59,7 +59,7 @@ jobs:
           sudo touch /var/www/DrillMaster/DrillMaster/debug.log
           sudo chmod 777 /var/www/DrillMaster/DrillMaster/*.log
           sudo chmod -R 777 /var/log/apache2/
-          sudo chown -% www-data /var/log/apache2/
+          sudo chown -R www-data /var/log/apache2/
       - name: show log folder rights
         run: ls -l /var/log/apache2/
       # move apache virtual host to folder
