@@ -71,7 +71,13 @@ jobs:
           sudo systemctl restart apache2
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: wget localhost
+        run: |
+          wget localhost
+          cat index.html
+          echo done with local
+          wget localhost/drillmaster
+          cat index.html
+          echo done with DM
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
