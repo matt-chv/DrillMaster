@@ -59,7 +59,7 @@ jobs:
       # move apache virtual host to folder
       - name: mv virtual site to folder
         run: |
-          mv ./rsc/dev.drillmaster.conf /etc/apache2/sites-available/drillmaster.conf
+          sudo mv ./rsc/dev.drillmaster.conf /etc/apache2/sites-available/drillmaster.conf
           a2ensite drillmaster.conf
           systemctl restart apache2
       # Runs a single command using the runners shell
