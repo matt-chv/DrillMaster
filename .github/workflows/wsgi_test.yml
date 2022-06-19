@@ -46,7 +46,7 @@ jobs:
          sudo apt-get install libapache2-mod-wsgi-py3
       - name: Install requirements
         run: |
-          sudo -H python pip install -r requirements.txt
+          sudo -H python -m pip install -r requirements.txt
       # NEXT
       # https://techtutorguro.com/how-to-install-flask-on-ubuntu-22-04-with-apache/
       - name: mv wsgi to folder
