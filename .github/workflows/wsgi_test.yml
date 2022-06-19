@@ -59,6 +59,9 @@ jobs:
           sudo touch /var/www/DrillMaster/DrillMaster/debug.log
           sudo chmod 777 /var/www/DrillMaster/DrillMaster/*.log
           sudo chmod -R 777 /var/log/apache2/
+          sudo chown -% www-data /var/log/apache2/
+      - name: show log folder rights
+        run: ls -l /var/log/apache2/
       # move apache virtual host to folder
       - name: mv virtual site to folder
         run: |
@@ -72,8 +75,7 @@ jobs:
           echo now running a2ensite
           sudo a2ensite dev.drillmaster.conf
           sudo systemctl restart apache2
-      - name: show log folder rights
-        run: ls -l /var/log/apache2/
+
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
