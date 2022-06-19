@@ -49,9 +49,18 @@ jobs:
           pip install -r requirements.txt
       # NEXT
       # https://techtutorguro.com/how-to-install-flask-on-ubuntu-22-04-with-apache/
+      - name: mv wsgi to folder
+        run: |
+          cp rsc/dev.drillmaster.conf /var/www/DrillMaster/drillmaster.wsgi
+      # move apache virtual host to folder
+      - name: mv virtual site to folder
+        run: |
+          cp drillmaster.wsgi /etc/apache2/sites-available/drillmaster.wsgi
+          a2ensite drillmaster.conf
+          systemctl restart apache2
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo Hello, world!
+        run: wget localhost
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
