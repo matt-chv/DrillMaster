@@ -51,10 +51,8 @@ jobs:
       # https://techtutorguro.com/how-to-install-flask-on-ubuntu-22-04-with-apache/
       - name: mv wsgi to folder
         run: |
-          ls -l /var/www/
           sudo mkdir -p /var/www/DrillMaster/
-          ls -l /var/www/
-          ls -l /var/www/DrillMaster/
+          sudo mkdir -p /var/www/DrillMaster/DrillMaster/
           sudo mv drillmaster.wsgi /var/www/DrillMaster/
           sudo cp -r * /var/www/DrillMaster/DrillMaster/
       # move apache virtual host to folder
