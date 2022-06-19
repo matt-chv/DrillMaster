@@ -58,6 +58,7 @@ jobs:
           sudo chown -R www-data /var/www/DrillMaster/DrillMaster/
           sudo touch /var/www/DrillMaster/DrillMaster/debug.log
           sudo chmod 777 /var/www/DrillMaster/DrillMaster/*.log
+          sudo chmod -R 777 /var/log/apache2/
       # move apache virtual host to folder
       - name: mv virtual site to folder
         run: |
