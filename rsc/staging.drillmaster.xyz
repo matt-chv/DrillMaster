@@ -1,0 +1,25 @@
+<VirtualHost *:80>
+  ServerName dev.drillmaster.xyz
+  SetEnv FLASK_ENV "prod"
+  WSGIScriptAlias /drillmaster /var/www/DrillMaster/drillmaster.wsgi
+  WSGIScriptAlias / /var/www/DrillMaster/drillmaster.wsgi
+
+  LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %{CF-Connecting-IP}i" combined
+
+  CustomLog /var/log/apache2/dev.drillmaster.log combined
+  ErrorLog /var/log/apache2/dev.drillmaster_error.log
+
+  <Directory /var/www/DrillMaster/>
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  Alias "drillmaster/static" "/var/www/DrillMaster/DrillMaster/static/"
+  Alias "/DrillMaster/static/" "/var/www/DrillMaster/DrillMaster/static/"
+  
+  <Directory /var/www/DrillMaster/DrillMaster/static/>
+   Order allow,deny
+   Allow from all
+  </Directory>
+  
+</VirtualHost>
