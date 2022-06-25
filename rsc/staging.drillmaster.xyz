@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-  ServerName dev.drillmaster.xyz
+  ServerName staging.drillmaster.xyz
   SetEnv FLASK_ENV "prod"
   WSGIScriptAlias /drillmaster /var/www/DrillMaster/drillmaster.wsgi
   WSGIScriptAlias / /var/www/DrillMaster/drillmaster.wsgi
