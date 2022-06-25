@@ -82,7 +82,7 @@ jobs:
           wget localhost
           echo done with local
           wget localhost/drillmaster
-          cat index.html
+          cat drillmaster
           echo done with DM
       # Debug apache2 
       - name: show apache2 logs
