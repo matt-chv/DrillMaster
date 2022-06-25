@@ -166,7 +166,6 @@ def favicon():
 @api.route('/')
 @api.route('/index')
 def index():
-    logging.error("went throug index")
     return api.send_static_file('index.html')
     #return index_html
 
